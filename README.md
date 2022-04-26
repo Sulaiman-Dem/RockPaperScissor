@@ -1,6 +1,7 @@
-## Rock, Paper, Scissors Game
-# Pseudocode
-User Interface:
+# Rock, Paper, Scissors Game
+## Pseudocode
+
+### User Interface:
 1.	Ask the user for their option
 -	1 being rock
 -	2 being paper
@@ -14,13 +15,15 @@ User Interface:
 
 
 
-# Code Interface:
+### Code Interface:
 Functions = 
 - Have function that indicates how paper beats rock, rock beats scissors and scissors beat paper. 
 - Only 3 options
 - A repeating function that keeps asking user if they want to play again
 
-# Int main ():  
+
+### Int main (): 
+Display = 
 -	Display what this game is about.
 -	People know rock paper scissor so no need for instructions
 -	Tell user that 1 = rock, 2 = paper and 3 = scissors. 
