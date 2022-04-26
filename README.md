@@ -34,3 +34,4 @@
 - Display what this game is about.
 - People know rock paper scissor so no need for instructions
 - Tell user that r = rock, p = paper and s = scissors.
+- Show what the computer choose then compare both results and show who wins
