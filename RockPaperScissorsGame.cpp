@@ -31,6 +31,4 @@ int main()
     cout << "Please type in '1' for Rock, '2' for Scissors and '3' for paper to play the game\n";
     cout << "Type your choice here:  ";
     cin >> input;
-
-    // Test hello
 }
