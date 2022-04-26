@@ -3,10 +3,10 @@
 
 ### User Interface:
 1.	Ask the user for their option
--	1 being rock
--	2 being paper
--	3 being scissors
-2.	 Then the computer will choose a number between 1, 2 or 3. 
+-	r being rock
+-	p being paper
+-	s being scissors
+2.	 Then the computer will choose a string between r, p or s. 
 3.	If the user loses then it will display you lost
 -	If the user wins it will display you win
 4.	 Then the user will be given the option to play again or chose to finish playing the game. 
@@ -26,5 +26,5 @@
 #### Display = 
 -	Display what this game is about.
 -	People know rock paper scissor so no need for instructions
--	Tell user that 1 = rock, 2 = paper and 3 = scissors. 
--	Limit user to only integer inputs
+-	Tell user that r = rock, p = paper and s = scissors. 
+
