@@ -16,14 +16,14 @@
 
 
 ### Code Interface:
-Functions = 
+#### Functions = 
 - Have function that indicates how paper beats rock, rock beats scissors and scissors beat paper. 
 - Only 3 options
 - A repeating function that keeps asking user if they want to play again
 
 
 ### Int main (): 
-Display = 
+#### Display = 
 -	Display what this game is about.
 -	People know rock paper scissor so no need for instructions
 -	Tell user that 1 = rock, 2 = paper and 3 = scissors. 
