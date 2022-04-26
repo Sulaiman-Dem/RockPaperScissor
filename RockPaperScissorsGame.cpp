@@ -21,7 +21,6 @@ int main()
     const string p2;
 
     string input{0};
-    input = rps(p1, p2);
 
     input = rps(p1, p2);
     cout << "                                       " << endl;
