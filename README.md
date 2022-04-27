@@ -18,7 +18,6 @@
 
 4.  Then the user will be given the option to play again or chose to finish playing the game.
 5.  It will keep repeating the game until the user it finished playing.
-6.  Explain you being player 1 and computer is player 2.
 
 ### Code Interface:
 
