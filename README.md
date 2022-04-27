@@ -25,8 +25,8 @@
 
 - Have function that indicates how paper beats rock, rock beats scissors and scissors beat paper. 3 options
 - A repeating function that keeps asking user if they want to play again
-- Make a functions that checks to see if it is only letter input instead of integers inputs
-- Make function that check string input by user to = 1 character. If requirement is not met user must retry.
+- Make function that declines any input besides r, p and s
+- Have a function that prints out user option of paper, rock or scissors
 - Have a function that prints out the CPU option of paper, rock or scissors
 - (Maybe) Create an animation of who wins (Advance)
 
