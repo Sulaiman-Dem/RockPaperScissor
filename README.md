@@ -14,6 +14,7 @@
 3.  If the user loses then it will display you lost
 
 - If the user wins it will display you win
+- else the user and computer draw
 
 4.  Then the user will be given the option to play again or chose to finish playing the game.
 5.  It will keep repeating the game until the user it finished playing.
