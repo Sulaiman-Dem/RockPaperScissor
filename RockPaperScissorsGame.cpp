@@ -246,8 +246,8 @@ int main()
         else
         {
             cerr << "\nThank you for Playing!"
-             << "\n  Have a Great Day"
-             << "\n                      " << endl;
+                 << "\n  Have a Great Day"
+                 << "\n                      " << endl;
 
             return 0;
         }
@@ -263,4 +263,5 @@ To-Do list! -
 /*
 Improvements
 1. Doesn't read strings so it chooses any option.
+2. When you run the program not from terminal it doesn't show goodbye message when user is finished with the program
 */
