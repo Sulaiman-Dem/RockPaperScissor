@@ -245,9 +245,9 @@ int main()
         }
         else
         {
-            cout << "\nThank you for Playing!";
-            cout << "\n   Have a Great Day";
-            cout << "\n                      ";
+            cerr << "\nThank you for Playing!"
+             << "\n  Have a Great Day"
+             << "\n                      " << endl;
 
             return 0;
         }
