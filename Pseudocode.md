@@ -32,8 +32,6 @@
 
 ### Int main ():
 
-#### Display =
-
 - Display what this game is about.
 - People know rock paper scissor so no need for instructions
 - Tell user that r = rock, p = paper and s = scissors.
