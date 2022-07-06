@@ -36,3 +36,8 @@
 - People know rock paper scissor so no need for instructions
 - Tell user that r = rock, p = paper and s = scissors.
 - Show what the computer choose then compare both results and show who wins
+
+### Issue
+
+1. When the user would put a string input the program would have issues reading the input and malfunction
+   Solution =
