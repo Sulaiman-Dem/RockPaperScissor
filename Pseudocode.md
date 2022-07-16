@@ -40,4 +40,4 @@
 ### Issue
 
 1. When the user would put a string input the program would have issues reading the input and malfunction
-   Solution =
+   Solution = I used cin.clear and cin.ignore with an if statement which has the same args as the while args then returned userInput when the user inputs the correct option
