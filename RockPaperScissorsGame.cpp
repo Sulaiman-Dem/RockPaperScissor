@@ -160,4 +160,6 @@ int main()
     loopUserDecision(); // This will loop the program until the user is finished
 }
 
+// improvements - Maybe add animation of you winning or losing
+
 // bug - If user input the correct input like r, p or s as the first character of the input then junk afterward. The program would read it as correct and work accordingly then when coming to the loop it will show invalid input the ask for correct input line 47
