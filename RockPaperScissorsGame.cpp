@@ -1,267 +1,161 @@
 #include <iostream>
-#include <string>
-#include <limits> // // for "cin.ignore(numeric_limits<streamsize>::max(), '\n');". For only integer input from user
-#include <cctype> // This header declares a set of functions to classify and transform individual characters. For example, isupper() checks whether a character is uppercase or not.
-using namespace std;
+#include <limits> // for "std::cin.ignore(numeric_limits<streamsize>::max(), '\n');".
 
-// Constant variables
-const char ROCK = 'r';
-const char PAPER = 'p';
-const char SCISSORS = 's';
-
-char getCpuOption()
+// This is a class for rock paper scissors game
+class rockPaperScissors
 {
-    srand(time(0));
-    // Random number
-    int num = rand() % 3 + 1;
+private:
+    // Constant variables that are used in many functions
+    char ROCK = 'r';
+    char PAPER = 'p';
+    char SCISSORS = 's';
 
-    if (num == 1)
-        return 'r';
-    if (num == 2)
-        return 'p';
-    if (num == 3)
-        return 's';
-    else
+public:
+    // This function will generate the choice of the CPU with srand() function
+    char getCpuChoice()
     {
-        return 0;
-    }
-}
+        srand((unsigned)time(0)); // This provides random generator option for C++ (Seeding) (Not reliable but it works most of the time) (uses time of opening program and uses of program to generate random numbers)
 
-char getUserOption()
-{
-    char input;
-    cout << "(r) for rock " << endl
-         << "(p) for paper" << endl
-         << "(s) for scissors " << endl;
-    cout << "Input your choice: ";
-    cin >> input;
+        int cpuChoice;
 
-    while (input != 'r' && input != 'p' && input != 's')
-    {
-        if (isupper(input)) // checks input to see if it is in upper case
+        for (int index = 0; index < 3; index++)
         {
-            cout << "                         " << endl;
-            cout << "Your Input is in Uppercase. Only lowercase. Try Again! " << endl;
-            cout << "(r) for rock " << endl
-                 << "(p) for paper" << endl
-                 << "(s) for scissors " << endl;
-            cout << "Input your choice: " << endl;
-            cin >> input;
+            cpuChoice = (rand() % 3) + 1;
+
+            if (cpuChoice == 1)
+                return 'r';
+            if (cpuChoice == 2)
+                return 'p';
+            if (cpuChoice == 3)
+                return 's';
         }
-        else if (!isupper(input)) // if its no uppercase but is something else besides r, p or s then retry
+        return cpuChoice;
+    }
+
+    // This function will get the user's choice of either rock, paper or scissors
+    char getUserChoice()
+    {
+        char userInput;
+        std::cout << "\n(r) for rock " << std::endl
+                  << "(p) for paper" << std::endl
+                  << "(s) for scissors " << std::endl;
+        std::cout << "Input your choice: ";
+        std::cin >> userInput;
+
+        while ((userInput != 'r') && (userInput != 'p') && (userInput != 's'))
         {
-            cout << "                         " << endl;
-            cout << "Please enter one of the following options only. " << endl;
-            cout << "(r) for rock " << endl
-                 << "(p) for paper" << endl
-                 << "(s) for scissors " << endl;
-            cout << "Input your choice: " << endl;
-            cin >> input;
+            // bug - Will work if first character of input is r, p or s
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            if (userInput != 'r' && userInput != 'p' && userInput != 's')
+            {
+                std::cout << "\nPlease enter one of the following options only. " << std::endl;
+                std::cout << "(r) for rock " << std::endl
+                          << "(p) for paper" << std::endl
+                          << "(s) for scissors " << std::endl;
+                std::cout << "Input your choice: ";
+                std::cin >> userInput;
+            }
         }
-        else
+        return userInput;
+    }
+
+    // This function will decide who is the winner and present the results
+    void seeWinner(const char userChoice, const char cpuChoice)
+    {
+        if ((userChoice == 'p' && cpuChoice == 'p') || (userChoice == 'r' && cpuChoice == 'r') || (userChoice == 's' && cpuChoice == 's'))
         {
-            return input;
+            std::cout << "You drew with the Computer! No Winner!";
+            std::cout << "\n";
+        }
+        if ((userChoice == 'p' && cpuChoice == 'r') || (userChoice == 'r' && cpuChoice == 's') || (userChoice == 's' && cpuChoice == 'p'))
+        {
+            std::cout << "You Win!";
+            std::cout << "\n";
+        }
+
+        if ((userChoice == 'r' && cpuChoice == 'p') || (userChoice == 's' && cpuChoice == 'r') || (userChoice == 'p' && cpuChoice == 's'))
+        {
+            std::cout << "You Lost!";
+            std::cout << "\n";
         }
     }
-    return input;
-}
 
-// string getLetters()
-// {
-//     string input;
-//     bool valid;
+    // This function will show the chosen option of the user and CPU
+    void showSelectedOption(char option)
+    {
+        if (option == 'r')
+            std::cout << "Rock" << std::endl;
+        if (option == 'p')
+            std::cout << "Paper" << std::endl;
+        if (option == 's')
+            std::cout << "Scissors" << std::endl;
+    }
+};
 
-//     do
-//     {
-//         getline(cin, input);  // get line of input
-//         valid = true;         // assume its valid
-//         for (auto &i : input) // check each character in the input string
-//         {
-
-//             if (!isalpha(i)) // is it alphabetical character?
-//             {
-//                 valid = false; // if not, mark it as invalid
-//                 // print an error to the user
-//                 cout << " Invalid input. Please input only alphabetical characters." << endl;
-//                 break; // break out of the for() loop, as we already established the input is invalid
-//             }
-//         }
-//     } while (!valid); // Keep going until we get input that's valid
-
-//     return input; // Once we have valid input, return it
-// }
-
-// string getCharacters()
-// {
-//     string input;
-
-//     getline(cin, input);
-//     if (input.length() != 1) // user input less/more than 1 character
-//     {
-//         cout << "You need to input only 1 letter (r, p or s).";
-//         cout << "\nTry Again!";
-//     }
-//     else
-//     {
-//         return input;
-//     }
-//     return input;
-// }
-
-// string seeWinner(const string userOption, const string cpuOption)
-// {
-//     if (userOption == cpuOption)
-//     {
-//         cout << "Draw!";
-//         return 0;
-//     }
-//     else if (userOption != cpuOption)
-//     {
-//         ((userOption[0] == 's' && cpuOption[0] == 'p') || (userOption[0] == 'p' && cpuOption[0] == 'r') || (userOption[0] == 'r' && cpuOption[0] == 's'));
-
-//         cout << "You Win!";
-//         return 0;
-//     }
-//     else
-//     {
-//         cout << "You Lose!";
-//         return 0;
-//     }
-// }
-
-void seeWinner(const char userOption, const char cpuOption)
+// This function will continuously loop the user's decision until the user is finished with using the program
+void loopUserDecision()
 {
 
-    if (userOption == 'p' && cpuOption == 'r')
-    {
-        cout << "Paper beats Rock! You Win!";
-        cout << "\n                                       ";
-    }
-    if (userOption == 'r' && cpuOption == 's')
-    {
-        cout << "Rock beats Scissors! You Win!";
-        cout << "\n                                       ";
-    }
-    if (userOption == 's' && cpuOption == 'p')
-    {
-        cout << "Scissors beats Paper! You Win!";
-        cout << "\n                                       ";
-    }
-    if (userOption == cpuOption)
-    {
-        cout << "You drew with the Computer! No Winner!";
-        cout << "\n                                      ";
-    }
-    if (cpuOption == 'p' && userOption == 'r')
-    {
-        cout << "Paper beats Rock! You Lost!";
-        cout << "\n                                       ";
-    }
-    if (cpuOption == 'r' && userOption == 's')
-    {
-        cout << "Rock beats Scissors! You Lost!";
-        cout << "\n                                       ";
-    }
-    if (cpuOption == 's' && userOption == 'p')
-    {
-        cout << "Scissors beats Paper! You Lost!";
-        cout << "\n                                       ";
-    }
-    // if (userOption == 'p' && cpuOption == 'p')
-    // {
-    //     cout << "You drew with the Computer! No Winner!";
-    //     cout << "\n                                       ";
-    // }
-    // if (userOption == 'r' && cpuOption == 'r')
-    // {
-    //     cout << "You drew with the Computer! No Winner!";
-    //     cout << "\n                                       ";
-    // }
-    // if (userOption == 's' && cpuOption == 's')
-    // {
-    //     cout << "You drew with the Computer! No Winner!";
-    //     cout << "\n                                       ";
-    // }
-}
+    class rockPaperScissors rps;
 
-void showSelectedOption(char option)
-{
-    if (option == 'r')
-        cout << "Rock" << endl;
-    if (option == 'p')
-        cout << "Paper" << endl;
-    if (option == 's')
-        cout << "Scissors" << endl;
+    int userDecision;
+    char userChoice;
+    char cpuChoice;
+
+    std::cout << "\nDo you wish to play again? (1 for yes or 0 for no): ";
+
+    while (!(std::cin >> userDecision) || (userDecision > 1) || (userDecision < 0))
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\nInvalid input. Try again!";
+        std::cout << "\nEnter Choice here: ";
+    }
+
+    if (userDecision == 1)
+    {
+        userChoice = rps.getUserChoice();
+        std::cout << "\nYour choice is: ";
+        rps.showSelectedOption(userChoice);
+
+        cpuChoice = rps.getCpuChoice();
+        std::cout << "\nComputer choice is: ";
+        rps.showSelectedOption(cpuChoice);
+
+        rps.seeWinner(userChoice, cpuChoice);
+
+        loopUserDecision();
+    }
+    if (userDecision == 0)
+    {
+        std::cout << "\nThank you for Playing!";
+        std::cout << "\n  Have a Great Day!";
+        std::cout << "\n\t";
+    }
 }
 
 int main()
 {
-    char userOption;
-    char cpuOption;
+    char userChoice;
+    char cpuChoice;
 
-    cout << "                                       " << endl;
-    cout << "\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-    cout << "\t\t     Rock-Paper-Scissors Game" << endl;
-    cout << "\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    class rockPaperScissors rps;
 
-    userOption = getUserOption();
-    cout << "                  " << endl;
-    cout << "Your choice is: ";
-    showSelectedOption(userOption);
+    std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+    std::cout << "     Rock-Paper-Scissors Game" << std::endl;
+    std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
-    cpuOption = getCpuOption();
-    cout << "                  " << endl;
-    cout << "Computer choice is: ";
-    showSelectedOption(userOption);
+    userChoice = rps.getUserChoice(); // This will store the user's choice in "userChoice"
+    std::cout << "\nYour choice is: ";
+    rps.showSelectedOption(userChoice); // This will present the user's choice with the stored value of "userChoice"
 
-    seeWinner(userOption, cpuOption);
+    cpuChoice = rps.getCpuChoice(); // This will store the CPU's choice in "cpuChoice"
+    std::cout << "\nComputer choice is: ";
+    rps.showSelectedOption(cpuChoice); // This will present the CPU's choice with the stored value of "cpuChoice"
 
-    int choice;
-    int i;
+    rps.seeWinner(userChoice, cpuChoice); // This will use both stored values and determine the winner and present results
 
-    cout << "                               ";
-    cout << "\nDo you wish to play again? (1 for yes or press any key for no): ";
-    cin >> choice;
-
-    for (i = 0; choice != 10000000; i++)
-    {
-
-        if (choice == 1)
-        {
-            userOption = getUserOption();
-            cout << "                  " << endl;
-            cout << "Your choice is: ";
-            showSelectedOption(userOption);
-
-            cpuOption = getCpuOption();
-            cout << "                  " << endl;
-            cout << "Computer choice is: ";
-            showSelectedOption(cpuOption);
-
-            seeWinner(userOption, cpuOption);
-            cout << "                               ";
-            cout << "\nDo you wish to play again? (1 for yes or press any key for no): ";
-            cin >> choice;
-        }
-        else
-        {
-            cerr << "\nThank you for Playing!"
-                 << "\n  Have a Great Day"
-                 << "\n                      " << endl;
-
-            return 0;
-        }
-    }
+    loopUserDecision(); // This will loop the program until the user is finished
 }
-
-/*
-To-Do list! -
-1. Try adding more user functionality
-2. Maybe add animation of you winning or losing
-*/
-
-/*
-Improvements
-1. Doesn't read strings so it chooses any option.
-2. When you run the program not from terminal it doesn't show goodbye message when user is finished with the program
-*/
