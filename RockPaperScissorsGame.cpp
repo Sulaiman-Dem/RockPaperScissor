@@ -4,12 +4,6 @@
 // This is a class for rock paper scissors game
 class rockPaperScissors
 {
-private:
-    // Constant variables that are used in many functions
-    char ROCK = 'r';
-    char PAPER = 'p';
-    char SCISSORS = 's';
-
 public:
     // This function will generate the choice of the CPU with srand() function
     char getCpuChoice()
@@ -33,22 +27,21 @@ public:
     }
 
     // This function will get the user's choice of either rock, paper or scissors
-    char getUserChoice()
+    std::string getUserChoice()
     {
-        char userInput;
+        std::string userInput;
         std::cout << "\n(r) for rock " << std::endl
                   << "(p) for paper" << std::endl
                   << "(s) for scissors " << std::endl;
         std::cout << "Input your choice: ";
         std::cin >> userInput;
 
-        while ((userInput != 'r') && (userInput != 'p') && (userInput != 's'))
+        while ((userInput != "r") && (userInput != "p") && (userInput != "s"))
         {
-            // bug - Will work if first character of input is r, p or s
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-            if (userInput != 'r' && userInput != 'p' && userInput != 's')
+            if (userInput != "r" && userInput != "p" && userInput != "s")
             {
                 std::cout << "\nPlease enter one of the following options only. " << std::endl;
                 std::cout << "(r) for rock " << std::endl
@@ -62,20 +55,20 @@ public:
     }
 
     // This function will decide who is the winner and present the results
-    void seeWinner(const char userChoice, const char cpuChoice)
+    void seeWinner(std::string userChoice, const char cpuChoice)
     {
-        if ((userChoice == 'p' && cpuChoice == 'p') || (userChoice == 'r' && cpuChoice == 'r') || (userChoice == 's' && cpuChoice == 's'))
+        if ((userChoice == "p" && cpuChoice == 'p') || (userChoice == "r" && cpuChoice == 'r') || (userChoice == "s" && cpuChoice == 's'))
         {
             std::cout << "You drew with the Computer! No Winner!";
             std::cout << "\n";
         }
-        if ((userChoice == 'p' && cpuChoice == 'r') || (userChoice == 'r' && cpuChoice == 's') || (userChoice == 's' && cpuChoice == 'p'))
+        if ((userChoice == "p" && cpuChoice == 'r') || (userChoice == "r" && cpuChoice == 's') || (userChoice == "s" && cpuChoice == 'p'))
         {
             std::cout << "You Win!";
             std::cout << "\n";
         }
 
-        if ((userChoice == 'r' && cpuChoice == 'p') || (userChoice == 's' && cpuChoice == 'r') || (userChoice == 'p' && cpuChoice == 's'))
+        if ((userChoice == "r" && cpuChoice == 'p') || (userChoice == "s" && cpuChoice == 'r') || (userChoice == "p" && cpuChoice == 's'))
         {
             std::cout << "You Lost!";
             std::cout << "\n";
@@ -83,7 +76,17 @@ public:
     }
 
     // This function will show the chosen option of the user and CPU
-    void showSelectedOption(char option)
+    void showSelectedOptionUser(std::string option)
+    {
+        if (option == "r")
+            std::cout << "Rock" << std::endl;
+        if (option == "p")
+            std::cout << "Paper" << std::endl;
+        if (option == "s")
+            std::cout << "Scissors" << std::endl;
+    }
+
+    void showSelectedOptionCPU(char option)
     {
         if (option == 'r')
             std::cout << "Rock" << std::endl;
@@ -100,35 +103,37 @@ void loopUserDecision()
 
     class rockPaperScissors rps;
 
-    int userDecision;
-    char userChoice;
+    std::string userDecision;
+    std::string userChoice;
     char cpuChoice;
 
     std::cout << "\nDo you wish to play again? (1 for yes or 0 for no): ";
+    std::cin >> userDecision;
 
-    while (!(std::cin >> userDecision) || (userDecision > 1) || (userDecision < 0))
+    while ((userDecision != "1") && (userDecision != "0"))
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "\nInvalid input. Try again!";
         std::cout << "\nEnter Choice here: ";
+        std::cin >> userDecision;
     }
 
-    if (userDecision == 1)
+    if (userDecision == "1")
     {
         userChoice = rps.getUserChoice();
         std::cout << "\nYour choice is: ";
-        rps.showSelectedOption(userChoice);
+        rps.showSelectedOptionUser(userChoice);
 
         cpuChoice = rps.getCpuChoice();
         std::cout << "\nComputer choice is: ";
-        rps.showSelectedOption(cpuChoice);
+        rps.showSelectedOptionCPU(cpuChoice);
 
         rps.seeWinner(userChoice, cpuChoice);
 
         loopUserDecision();
     }
-    if (userDecision == 0)
+    if (userDecision == "0")
     {
         std::cout << "\nThank you for Playing!";
         std::cout << "\n  Have a Great Day!";
@@ -138,7 +143,7 @@ void loopUserDecision()
 
 int main()
 {
-    char userChoice;
+    std::string userChoice;
     char cpuChoice;
 
     class rockPaperScissors rps;
@@ -149,11 +154,11 @@ int main()
 
     userChoice = rps.getUserChoice(); // This will store the user's choice in "userChoice"
     std::cout << "\nYour choice is: ";
-    rps.showSelectedOption(userChoice); // This will present the user's choice with the stored value of "userChoice"
+    rps.showSelectedOptionUser(userChoice); // This will present the user's choice with the stored value of "userChoice"
 
     cpuChoice = rps.getCpuChoice(); // This will store the CPU's choice in "cpuChoice"
     std::cout << "\nComputer choice is: ";
-    rps.showSelectedOption(cpuChoice); // This will present the CPU's choice with the stored value of "cpuChoice"
+    rps.showSelectedOptionCPU(cpuChoice); // This will present the CPU's choice with the stored value of "cpuChoice"
 
     rps.seeWinner(userChoice, cpuChoice); // This will use both stored values and determine the winner and present results
 
@@ -161,5 +166,3 @@ int main()
 }
 
 // improvements - Maybe add animation of you winning or losing
-
-// bug - If user input the correct input like r, p or s as the first character of the input then junk afterward. The program would read it as correct and work accordingly then when coming to the loop it will show invalid input the ask for correct input line 47
