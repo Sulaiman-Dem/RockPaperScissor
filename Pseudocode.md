@@ -33,4 +33,4 @@
 2. If user input the correct input like r, p or s as the first character of the input then junk afterward. The program would read it as correct and work accordingly then when coming to the loop it will show invalid input the ask for correct input. Then the user can decide if they want to continue using program
    Solution = So I changed the user input to a string input instead of char. So, the program will read a string input and if it isn't r, p or s then the program will say wrong input
 3. The same as issue 2 but with the loop function because if the user would input 0 or 1 as the first character it would read it as correct even with other junk after that input
-   Solution = I convert the userDecision input a string and changed the args in the while so it if the user doesn't input 1 or 0 then it will show as incorrect
+   Solution = I convert the userDecision input a string and changed the args in the while (OR to AND) so it if the user doesn't input 1 or 0 then it will show as incorrect
