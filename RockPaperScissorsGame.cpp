@@ -1,15 +1,14 @@
 #include <iostream>
 #include <limits> // for "std::cin.ignore(numeric_limits<streamsize>::max(), '\n');".
-#include <string>
 
 // This is a class for rock paper scissors game
 class rockPaperScissors
 {
 private:
     // Constant variables that are used in many functions
-    std::string ROCK = "r";
-    std::string PAPER = "p";
-    std::string SCISSORS = "s";
+    char ROCK = 'r';
+    char PAPER = 'p';
+    char SCISSORS = 's';
 
 public:
     // This function will generate the choice of the CPU with srand() function
